@@ -1,0 +1,15 @@
+name: good
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - run: echo ok
+  call:
+    uses: ./.github/workflows/other.yml
+  dynamic:
+    runs-on: ubuntu-24.04
+    timeout-minutes: ${{ fromJSON(inputs.timeout) }}
+    steps:
+      - run: echo ok

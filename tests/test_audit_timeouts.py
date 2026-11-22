@@ -34,6 +34,10 @@ class MainTest(unittest.TestCase):
         self.assertEqual(audit_timeouts.main([str(FIXTURES / "good.yml")]), 0)
         self.assertEqual(audit_timeouts.main([str(FIXTURES / "missing.yml")]), 1)
 
+    def test_unreadable_path_is_a_finding_not_a_crash(self):
+        findings = audit_timeouts.audit_workflow(FIXTURES / "nope.yml", 30)
+        self.assertIn("nope.yml: cannot read", findings[0])
+
 
 if __name__ == "__main__":
     unittest.main()

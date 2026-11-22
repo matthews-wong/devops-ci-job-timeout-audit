@@ -16,6 +16,8 @@ def audit_workflow(path, max_minutes):
     """Return one message per job in `path` that breaks the timeout policy."""
     try:
         doc = yaml.safe_load(path.read_text())
+    except OSError as exc:
+        return [f"{path}: cannot read: {exc.strerror}"]
     except yaml.YAMLError as exc:
         return [f"{path}: not valid YAML: {exc}"]
     jobs = doc.get("jobs") if isinstance(doc, dict) else None

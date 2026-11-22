@@ -17,7 +17,9 @@ values such as `${{ inputs.timeout }}` are accepted as-is.
 
 ## Validate
 
+    pip install -r requirements.txt
     make validate
 
-Runs the unit tests, `actionlint`, `shellcheck`-free by design (Python
-only), and the audit against this repository's own workflows.
+`make validate` runs the unit tests, `actionlint` (install it separately;
+CI skips it rather than pipe an installer into a shell) and the audit
+against this repository's own workflows.
